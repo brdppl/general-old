@@ -1,4 +1,6 @@
 import { Component } from '@angular/core';
+import { ModalController } from '@ionic/angular';
+import { AddPlayersPage } from '../modals/add-players/add-players.page';
 
 @Component({
   selector: 'app-home',
@@ -7,6 +9,16 @@ import { Component } from '@angular/core';
 })
 export class HomePage {
 
-  constructor() {}
+  constructor(
+    private modalController: ModalController
+  ) {}
+
+  async addPlayers() {
+    const modal = await this.modalController.create({
+      component: AddPlayersPage
+    });
+    return await modal.present()
+  }
+
 
 }

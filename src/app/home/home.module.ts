@@ -5,6 +5,7 @@ import { IonicModule } from '@ionic/angular';
 import { RouterModule } from '@angular/router';
 
 import { HomePage } from './home.page';
+import { AddPlayersPageModule } from '../modals/add-players/add-players.module';
 
 @NgModule({
   imports: [

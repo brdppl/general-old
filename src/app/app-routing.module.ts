@@ -14,6 +14,14 @@ const routes: Routes = [
   {
     path: 'list',
     loadChildren: () => import('./list/list.module').then(m => m.ListPageModule)
+  },
+  {
+    path: 'add-players',
+    loadChildren: () => import('./modals/add-players/add-players.module').then( m => m.AddPlayersPageModule)
+  },
+  {
+    path: 'game',
+    loadChildren: () => import('./game/game.module').then( m => m.GamePageModule)
   }
 ];
 
