@@ -5,7 +5,7 @@ import { IonicModule } from '@ionic/angular';
 import { RouterModule } from '@angular/router';
 
 import { HomePage } from './home.page';
-import { AddPlayersPageModule } from '../modals/add-players/add-players.module';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 
 @NgModule({
   imports: [
@@ -17,7 +17,8 @@ import { AddPlayersPageModule } from '../modals/add-players/add-players.module';
         path: '',
         component: HomePage
       }
-    ])
+    ]),
+    FontAwesomeModule
   ],
   declarations: [HomePage]
 })
