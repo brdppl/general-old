@@ -12,8 +12,8 @@ const routes: Routes = [
     loadChildren: () => import('./home/home.module').then(m => m.HomePageModule)
   },
   {
-    path: 'list',
-    loadChildren: () => import('./list/list.module').then(m => m.ListPageModule)
+    path: 'rules',
+    loadChildren: () => import('./rules/rules.module').then(m => m.RulesPageModule)
   },
   {
     path: 'add-players',
@@ -22,6 +22,10 @@ const routes: Routes = [
   {
     path: 'game',
     loadChildren: () => import('./game/game.module').then( m => m.GamePageModule)
+  },
+  {
+    path: 'rules',
+    loadChildren: () => import('./rules/rules.module').then( m => m.RulesPageModule)
   }
 ];
 

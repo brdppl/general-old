@@ -10,6 +10,7 @@ import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
 import { HomePageModule } from './home/home.module';
 import { AddPlayersPageModule } from './modals/add-players/add-players.module';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 
 @NgModule({
   declarations: [AppComponent],
@@ -19,7 +20,8 @@ import { AddPlayersPageModule } from './modals/add-players/add-players.module';
     IonicModule.forRoot(),
     AppRoutingModule,
     HomePageModule,
-    AddPlayersPageModule
+    AddPlayersPageModule,
+    FontAwesomeModule
   ],
   providers: [
     StatusBar,

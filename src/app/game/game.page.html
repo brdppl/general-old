@@ -101,14 +101,16 @@
           </ion-item>
         </td>
       </tr>
+    </tbody>
+    <tfoot>
       <tr>
         <td>T</td>
         <td *ngFor="let player of players; let i = index">
-          <ion-item lines="none">
+          <div class="d-flex h-center" style="padding: 15px;">
             <strong>{{player.total}}</strong>
-          </ion-item>
+          </div>
         </td>
       </tr>
-    </tbody>
+    </tfoot>
   </table>
 </ion-content>

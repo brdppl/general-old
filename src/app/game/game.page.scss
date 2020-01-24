@@ -1,6 +1,26 @@
 table {
     th, td {
         padding: 5px;
-        border: solid 1px #aaa;
+        border: solid 1px #dee2e6;
+    }
+
+    thead {
+        tr {
+            background-color: rgba(0, 0, 0, 0.05);
+
+            th, td {
+                border-bottom-width: 2px;
+            }
+        }
+    }
+
+    tfoot {
+        tr {
+            background-color: rgba(0, 0, 0, 0.05);
+
+            td {
+                border-top-width: 2px;
+            }
+        }
     }
 }

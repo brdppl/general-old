@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { GameStateService } from '../services/game-state.service';
-import { NavController } from '@ionic/angular';
+import { NavController, AlertController } from '@ionic/angular';
 
 @Component({
   selector: 'app-game',
@@ -14,7 +14,8 @@ export class GamePage implements OnInit {
 
   constructor(
     private gameService: GameStateService,
-    private nav: NavController
+    private nav: NavController,
+    private alert: AlertController
   ) { }
 
   ngOnInit() {
@@ -39,8 +40,28 @@ export class GamePage implements OnInit {
   }
 
   public finish() {
-    this.nav.navigateRoot(['/home'])
-    this.gameService.destroyGame()
+    this.handle()
+  }
+
+  async handle() {
+    const alert = await this.alert.create({
+      header: 'Atenção',
+      message: 'Deseja realmente finalizar esta partida?',
+      buttons: [
+        {
+          text: 'Não'
+        },
+        {
+          text: 'Sim',
+          handler: () => {
+            this.nav.navigateRoot(['/home'])
+            this.gameService.destroyGame()
+          }
+        }
+      ]
+    });
+
+    await alert.present();
   }
 
 }
