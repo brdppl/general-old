@@ -4,6 +4,7 @@ import { SplashScreen } from '@ionic-native/splash-screen/ngx';
 import { StatusBar } from '@ionic-native/status-bar/ngx';
 import { GameStateService } from './services/game-state.service';
 import { faDice } from '@fortawesome/free-solid-svg-icons';
+import { Storage } from '@ionic/storage';
 
 @Component({
   selector: 'app-root',
@@ -27,14 +28,20 @@ export class AppComponent {
   public faDice = faDice
 
   public isIOS: boolean
+  public players = []
 
   constructor(
     private platform: Platform,
     private splashScreen: SplashScreen,
     private statusBar: StatusBar,
-    public gameService: GameStateService
+    public gameService: GameStateService,
+    private storage: Storage
   ) {
     this.initializeApp();
+
+    this.storage.get(this.gameService.playersToken).then(data => {
+      this.players = data
+    })
   }
 
   initializeApp() {

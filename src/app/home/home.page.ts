@@ -3,6 +3,7 @@ import { ModalController, NavController, AlertController } from '@ionic/angular'
 import { AddPlayersPage } from '../modals/add-players/add-players.page';
 import { GameStateService } from '../services/game-state.service';
 import { faDice } from '@fortawesome/free-solid-svg-icons';
+import { Storage } from '@ionic/storage';
 
 @Component({
   selector: 'app-home',
@@ -17,15 +18,18 @@ export class HomePage {
   constructor(
     private modalController: ModalController,
     private gameService: GameStateService,
-    private alert: AlertController
+    private alert: AlertController,
+    private storage: Storage
   ) { }
 
   ionViewDidEnter() {
-    this.players = this.gameService.listPlayers()
+    this.storage.get(this.gameService.playersToken).then(data => {
+      this.players = data
+    })
   }
 
   public addPlayers() {
-    if(this.gameService.listPlayers()) {
+    if(this.players) {
       this.handle()
     } else {
       this.createModal()

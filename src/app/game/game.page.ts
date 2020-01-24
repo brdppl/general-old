@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { GameStateService } from '../services/game-state.service';
 import { NavController, AlertController } from '@ionic/angular';
+import { Storage } from '@ionic/storage';
 
 @Component({
   selector: 'app-game',
@@ -10,12 +11,11 @@ import { NavController, AlertController } from '@ionic/angular';
 export class GamePage implements OnInit {
   public players = []
 
-  private oldArr = []
-
   constructor(
     private gameService: GameStateService,
     private nav: NavController,
-    private alert: AlertController
+    private alert: AlertController,
+    private storage: Storage
   ) { }
 
   ngOnInit() {
@@ -23,7 +23,9 @@ export class GamePage implements OnInit {
   }
 
   private loadPlayers() {
-    this.players = this.gameService.listPlayers()
+    this.storage.get(this.gameService.playersToken).then(data => {
+      this.players = data
+    })
   }
 
   public calcTotal(player) {
@@ -55,7 +57,7 @@ export class GamePage implements OnInit {
           text: 'Sim',
           handler: () => {
             this.nav.navigateRoot(['/home'])
-            this.gameService.destroyGame()
+            this.storage.remove(this.gameService.playersToken)
           }
         }
       ]

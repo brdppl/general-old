@@ -11,6 +11,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { HomePageModule } from './home/home.module';
 import { AddPlayersPageModule } from './modals/add-players/add-players.module';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { IonicStorageModule } from '@ionic/storage';
 
 @NgModule({
   declarations: [AppComponent],
@@ -21,7 +22,8 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
     AppRoutingModule,
     HomePageModule,
     AddPlayersPageModule,
-    FontAwesomeModule
+    FontAwesomeModule,
+    IonicStorageModule.forRoot()
   ],
   providers: [
     StatusBar,
