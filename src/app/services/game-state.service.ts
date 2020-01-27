@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { Injectable, Output, EventEmitter } from '@angular/core';
 import { Storage } from '@ionic/storage';
 
 @Injectable({
@@ -9,10 +9,17 @@ export class GameStateService {
 
   constructor(private storage: Storage) { }
 
-  // public storagePlayers = (players) => localStorage.setItem(this.playersToken, JSON.stringify(players))
-  public storagePlayers = (players) => this.storage.set(this.playersToken, players)
+  @Output() fireListPlayers: EventEmitter<any> = new EventEmitter<any>()
 
-  // public listPlayers = () => JSON.parse(localStorage.getItem(this.playersToken))
+  public storagePlayers(players) {
+    this.storage.set(this.playersToken, players)
+    this.fireListPlayers.emit(players)
+  }
 
-  // public destroyGame = () => localStorage.removeItem(this.playersToken)
+  public getEmit = () => this.fireListPlayers
+
+  public destroyGame() {
+    this.storage.remove(this.playersToken)
+    this.fireListPlayers.emit(null)
+  }
 }

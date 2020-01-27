@@ -16,9 +16,8 @@
               </ion-label>
             </ion-item>
           </ion-menu-toggle>
-          <ion-menu-toggle auto-hide="false">
+          <ion-menu-toggle auto-hide="false" *ngIf="players">
             <ion-item [routerDirection]="'root'" routerLink="/game">
-              <!-- <ion-icon slot="start" name="star"></ion-icon> -->
               <fa-icon slot="start" [icon]="faDice" [ngStyle]="{'color': !isIOS ? 'rgba(0, 0, 0, 0.54)' : 'rgba(0, 0, 0, 1)', 'font-size': !isIOS ? '18px' : '22px'}"></fa-icon>
               <ion-label>
                 Jogo em andamento

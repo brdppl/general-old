@@ -57,7 +57,7 @@ export class GamePage implements OnInit {
           text: 'Sim',
           handler: () => {
             this.nav.navigateRoot(['/home'])
-            this.storage.remove(this.gameService.playersToken)
+            this.gameService.destroyGame()
           }
         }
       ]

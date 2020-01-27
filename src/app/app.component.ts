@@ -38,10 +38,6 @@ export class AppComponent {
     private storage: Storage
   ) {
     this.initializeApp();
-
-    this.storage.get(this.gameService.playersToken).then(data => {
-      this.players = data
-    })
   }
 
   initializeApp() {
@@ -50,6 +46,14 @@ export class AppComponent {
       this.statusBar.backgroundColorByHexString('#111111');
       this.splashScreen.hide();
       this.isIOS = this.platform.is('ios')
+
+      this.storage.get(this.gameService.playersToken).then(data => {
+        this.players = data
+      })
+  
+      this.gameService.getEmit().subscribe(data => {
+        this.players = data
+      })
     });
   }
 }
