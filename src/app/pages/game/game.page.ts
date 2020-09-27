@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { GameStateService } from 'src/app/services/game-state.service';
 import { NavController, AlertController } from '@ionic/angular';
 import { Storage } from '@ionic/storage';
+import { UtilsService } from 'src/app/services/utils.service';
+import * as _ from 'lodash';
 
 @Component({
   selector: 'app-game',
@@ -11,13 +13,16 @@ import { Storage } from '@ionic/storage';
 export class GamePage implements OnInit {
   public players = []
 
-  public showAnimation: boolean = false
+  public isShowingAnimation: boolean = false
+  public result: string
+  public score: string
 
   constructor(
     private gameService: GameStateService,
     private nav: NavController,
     private alert: AlertController,
-    private storage: Storage
+    private storage: Storage,
+    private util: UtilsService
   ) { }
 
   ngOnInit() {
@@ -41,7 +46,8 @@ export class GamePage implements OnInit {
       }
     })
     this.gameService.storagePlayers(this.players)
-    this.triggerAnimation(player.total)
+
+    this.teste(this.players)
   }
 
   public finish() {
@@ -69,51 +75,50 @@ export class GamePage implements OnInit {
     await alert.present();
   }
 
-  private triggerAnimation(total) {
-    console.log('aaa', total)
-    if(total !== 280) {
-      return
-    } else {
-      this.animation()
+  private teste(players) {
+    const values = []
+    const participants = []
+    players.forEach(el => {
+      Object.values(el).forEach(val => {
+        values.push(val)
+      })
+      participants.push({name: el.name, total: el.total})
+    })
+    if(!values.includes(null)) {
+      this.isShowingAnimation = true
+      // const winner = participants.reduce((a, b) => (a.total > b.total) ? a : b)
+      const winner = _.maxBy(participants, 'total')
+
+      let draw = []
+      const counts = _.countBy(participants, 'total')
+      draw = _.filter(participants, x => counts[x.total] > 1)
+
+      if(draw.length) {
+        const tmpDraw = []
+        draw.forEach(el => {
+          if(winner.total > el.total) {
+            this.result = this.util.randomMessage(winner.name)
+            this.score = `Com ${winner.total} pontos`
+          } else {
+            tmpDraw.push(el.name)
+            if(tmpDraw.length > 2) {
+              this.result = `${tmpDraw.join(', ').replace(/, ((?:.(?!, ))+)$/, ' e $1')} empataram`
+              this.score = `Com ${winner.total} pontos`
+            } else {
+              this.result = `${tmpDraw.join(' e ')} empataram`
+              this.score = `Com ${winner.total} pontos`
+            }
+          }
+        })
+      } else {
+        this.result = this.util.randomMessage(winner.name)
+        this.score = `Com ${winner.total} pontos`
+      }
     }
   }
 
-  private animation() {
-    this.showAnimation = true
-
-    function random(num) {
-      return Math.floor(Math.random()*num)
-    }
-    
-    function getRandomStyles() {
-      const r = random(255)
-      const g = random(255)
-      const b = random(255)
-      const mt = random(200)
-      const ml = random(50)
-      const dur = random(5)+5
-      return `
-        background-color: rgba(${r},${g},${b},0.7);
-        color: rgba(${r},${g},${b},0.7); 
-        box-shadow: inset -7px -3px 10px rgba(${r-10},${g-10},${b-10},0.7);
-        margin: ${mt}px 0 0 ${ml}px;
-        animation: float ${dur}s ease-in infinite;
-      `
-    }
-    
-    function createBalloons(num) {
-      const balloonContainer = window.document.getElementById('balloon-container')
-      for (let i = num; i > 0; i--) {
-        const balloon = window.document.createElement('div')
-        balloon.className = 'balloon'
-        balloon.style.cssText = getRandomStyles()
-        balloonContainer.append(balloon)
-      }
-    }
-    
-    // window.onload = function() {
-      createBalloons(100)
-    // }
+  public closeAnimation() {
+    if(this.isShowingAnimation) this.isShowingAnimation = false
   }
 
 }

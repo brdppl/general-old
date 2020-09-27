@@ -1,4 +1,20 @@
-<div id="balloon-container" [ngStyle]="{'display': showAnimation ? '' : 'none'}" (click)="showAnimation = false"></div>
+<div class="animation" (click)="closeAnimation()" *ngIf="isShowingAnimation">
+  <div class="pyro">
+    <div class="before"></div>
+    <div class="after"></div>
+  </div>
+  <div class="name">
+    <h3 class="animate__animated animate__bounceInUp animate__slow">
+      {{result}}
+    </h3>
+    <h3 class="animate__animated animate__bounceInUp animate__slow animate__delay-1s">
+      {{score}}
+    </h3>
+    <p class="animate__animated animate__bounceInUp animate__delay-4s">
+      Toque para fechar
+    </p>
+  </div>
+</div>
 
 <ion-header>
   <ion-toolbar>

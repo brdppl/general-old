@@ -11,6 +11,16 @@ export class ModalAddPlayerPage implements OnInit {
 
   public players = [{
     name: '',
+    ponto1: null,
+    ponto2: null,
+    ponto3: null,
+    ponto4: null,
+    ponto5: null,
+    ponto6: null,
+    pontoS: null,
+    pontoF: null,
+    pontoP: null,
+    pontoG: null,
     total: 0,
     index: 0
   }]
@@ -34,6 +44,16 @@ export class ModalAddPlayerPage implements OnInit {
   public newPlayer() {
     this.players.push({
       name: this.player,
+      ponto1: null,
+      ponto2: null,
+      ponto3: null,
+      ponto4: null,
+      ponto5: null,
+      ponto6: null,
+      pontoS: null,
+      pontoF: null,
+      pontoP: null,
+      pontoG: null,
       total: 0,
       index: this.players.length
     })
