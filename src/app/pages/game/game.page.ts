@@ -4,6 +4,7 @@ import { NavController, AlertController } from '@ionic/angular';
 import { Storage } from '@ionic/storage';
 import { UtilsService } from 'src/app/services/utils.service';
 import * as _ from 'lodash';
+import { Keyboard } from '@ionic-native/keyboard/ngx';
 
 @Component({
   selector: 'app-game',
@@ -22,7 +23,8 @@ export class GamePage implements OnInit {
     private nav: NavController,
     private alert: AlertController,
     private storage: Storage,
-    private util: UtilsService
+    private util: UtilsService,
+    private keyboard: Keyboard
   ) { }
 
   ngOnInit() {
@@ -46,8 +48,10 @@ export class GamePage implements OnInit {
       }
     })
     this.gameService.storagePlayers(this.players)
-
-    this.teste(this.players)
+    
+    setTimeout(() => {
+      this.runAnimation(this.players)
+    }, 2000)
   }
 
   public finish() {
@@ -75,7 +79,8 @@ export class GamePage implements OnInit {
     await alert.present();
   }
 
-  private teste(players) {
+  private runAnimation(players) {
+    this.keyboard.hide()
     const values = []
     const participants = []
     players.forEach(el => {
