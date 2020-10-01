@@ -80,7 +80,6 @@ export class GamePage implements OnInit {
   }
 
   private runAnimation(players) {
-    this.keyboard.hide()
     const values = []
     const participants = []
     players.forEach(el => {
@@ -90,6 +89,7 @@ export class GamePage implements OnInit {
       participants.push({name: el.name, total: el.total})
     })
     if(!values.includes(null)) {
+      this.keyboard.hide()
       this.isShowingAnimation = true
       // const winner = participants.reduce((a, b) => (a.total > b.total) ? a : b)
       const winner = _.maxBy(participants, 'total')

@@ -1,8 +1,8 @@
 {
   "name": "general",
   "version": "0.0.1",
-  "author": "Ionic Framework",
-  "homepage": "https://ionicframework.com/",
+  "author": "Bernardo Sampaio",
+  "homepage": "https://codeart.com.br/",
   "scripts": {
     "ng": "ng",
     "start": "ng serve",

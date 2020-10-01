@@ -48,9 +48,10 @@ export class AppComponent {
 
   initializeApp() {
     this.platform.ready().then(() => {
-      this.statusBar.overlaysWebView(false);
-      this.statusBar.backgroundColorByHexString('#111111');
-      this.splashScreen.hide();
+      this.statusBar.overlaysWebView(false)
+      this.statusBar.backgroundColorByHexString('#111111')
+      this.splashScreen.hide()
+
       this.isIOS = this.platform.is('ios')
 
       this.storage.get(this.gameService.playersToken).then(data => {
@@ -70,6 +71,18 @@ export class AppComponent {
         }
       })
     });
+  }
+
+  public toggleTheme() {
+    if(this.isDarkMode) {
+      document.body.removeAttribute('data-theme');
+      this.isDarkMode = false
+      this.storage.set('dark-mode', this.isDarkMode)
+    } else {
+      document.body.setAttribute('data-theme', 'dark');
+      this.isDarkMode = true
+      this.storage.set('dark-mode', this.isDarkMode)
+    }
   }
 
   public toggleDark(event){

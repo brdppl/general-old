@@ -24,7 +24,7 @@
               </ion-label>
             </ion-item>
           </ion-menu-toggle>
-          <ion-item>
+          <ion-item (click)="toggleTheme()">
             <ion-icon slot="start" name="moon"></ion-icon>
             <ion-label>Modo escuro</ion-label>
             <ion-toggle (ionChange)="toggleDark($event)" slot="end" [checked]="isDarkMode"></ion-toggle>
